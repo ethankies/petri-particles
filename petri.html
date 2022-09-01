@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petri.life</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+    
+    <link rel="stylesheet" href="petri.css">
+</head>
+<body>
+    <!-- KoFi Donate -->
+    <!-- petri.life -->
+    <div id="upper-text">
+        <h1>Petri.life</h1>
+        <h2>Complexity from simplicity</h2>
+    </div>
+    <div id="canvas-container"></div>
+    <div id="petri-buttons">
+        <button id ="add-particle" class="game-button" onclick="revealDiv('input-form-particle')">Add Particle</button>
+        <button id ="remove-particle" class="game-button" onclick="revealDiv('input-form-particle-remove')">Remove Particle</button>
+        <button id ="add-particle" class="game-button" onclick="revealDiv('input-form-add-rule')">Add Rule</button>
+        <button id ="restart" class="game-button">Restart</button>
+        <button id ="reset" class="game-button">Reset</button>
+    </div>
+    <!-- Add particles -->
+    <div id="input-form-particle" style="display: none;">
+        <input type="color" id="color-picker"class="inputFormElement">
+      <input type="text" id = "number-particles-add"class="inputFormElement" placeholder="Enter number of particles (e.g. 50)">
+        <input type="submit" class="game-button inputFormElement" onclick="getNewParticle(); revealDiv('input-form-particle')">
+    </div>
+
+    <!-- Remove particles -->
+    <div id="input-form-particle-remove" style="display: none;">
+      <input type="text" class="inputFormElement" placeholder="Enter particle ID">
+        <input type="submit" class="game-button inputFormElement" onclick="revealDiv('input-form-particle-remove')">
+    </div>
+
+   <!-- Add rule -->
+    <div id="input-form-add-rule" style="display: none;">
+      <input type="text" class="inputFormElement" placeholder="Enter particle A ID">
+      <input type="text" class="inputFormElement" placeholder="Enter particle B ID">
+      <input type="range"class="inputFormElement" value="1" min="0" max="1" step="0.1" name="Gravity">
+        <input type="submit" class="game-button inputFormElement" onclick="revealDiv('input-form-add-rule')">
+    </div>
+
+    <script src="petri.js"></script>
+    <script src="buttonControl.js"></script>
+</body>
+</html>
