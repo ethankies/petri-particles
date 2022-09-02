@@ -64,10 +64,10 @@ function setup() {
    console.log(color(random(0,255), random(0,255), random(0,255)).toString())
 //spawn can only take a hex or a string
     cnv.parent("canvas-container"); 
-    yellowP = spawn(50, '#' + Math.floor(Math.random()*16777215).toString(16), 0)
-    greenP = spawn(50, '#' + Math.floor(Math.random()*16777215).toString(16), 1)    
-    ids[0] = yellowP;
-    ids[1] = greenP;
+    pone = spawn(200, '#' + Math.floor(Math.random()*16777215).toString(16), 0)
+    ptwo = spawn(200, '#' + Math.floor(Math.random()*16777215).toString(16), 1)    
+    ids[0] = pone;
+    ids[1] = ptwo;
     //Add elems to div
     var div = createDiv("Particle ID");
     div.style('font-weight', 'bold')
@@ -87,13 +87,41 @@ function setup() {
     var ruleDiv = createDiv("Rules");
     styleRule(ruleDiv)
     ruleDiv.style("font-weight", 'bold')
-    rules.push([yellowP, yellowP, (random() - 0.25)]);
+
+   // rules.push([yellowP, yellowP, (random() - 0.25)]);
     
-    createRuleDiv()
+    //createRuleDiv()
 
-    rules.push([greenP, yellowP, random() - 0.5]);
-    createRuleDiv()
+    //rules.push([greenP, yellowP, random() - 0.5]);
+    //createRuleDiv()
 
+    /* Nucleus */
+    // rules.push([pone, ptwo, -0.1]);
+    // createRuleDiv()
+    // rules.push([pone, ptwo, -0.01]);
+    // createRuleDiv()
+    // rules.push([ptwo, pone, 0.01]);
+    // createRuleDiv()
+
+
+    /*flying machine shape*/
+    pthree = spawn(50, '#' + Math.floor(Math.random()*16777215).toString(16), 2)
+    ids[2]
+    rules.push([pone, pone, -0.32]);
+    createRuleDiv()
+    rules.push([pone, ptwo, -0.17]);
+    createRuleDiv()
+    rules.push([pone, pthree, 0.34]);
+    createRuleDiv()
+    rules.push([ptwo, ptwo, -0.10]);
+    createRuleDiv()
+    rules.push([pone, pone, -0.34]);
+    createRuleDiv()
+    rules.push([pthree, pthree, 0.15]);
+    createRuleDiv()
+    rules.push([pthree, pone, -0.20]);
+    createRuleDiv()
+    
   }
  
   function draw() {
