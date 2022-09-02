@@ -12,17 +12,22 @@
 <body>
     <!-- KoFi Donate -->
     <!-- petri.life -->
-    <div id="upper-text">
+    <div id="upper-text" >
         <h1>Petri.life</h1>
         <h2>Complexity from simplicity</h2>
     </div>
-    <div id="canvas-container"></div>
+    <div id = "canvas-text-container">
+      <div id="canvas-container"></div>
+      <div id="particle-holder"></div>
+    </div>
+
+   
     <div id="petri-buttons">
         <button id ="add-particle" class="game-button" onclick="revealDiv('input-form-particle')">Add Particle</button>
-        <button id ="remove-particle" class="game-button" onclick="revealDiv('input-form-particle-remove')">Remove Particle</button>
-        <button id ="add-particle" class="game-button" onclick="revealDiv('input-form-add-rule')">Add Rule</button>
+        <button id ="add-rule" class="game-button" onclick="revealDiv('input-form-add-rule')">Add Rule</button>
+        <!-- <button id ="remove-particle" class="game-button" onclick="revealDiv('input-form-particle-remove')">Remove Particle</button> -->
         <button id ="restart" class="game-button">Restart</button>
-        <button id ="reset" class="game-button">Reset</button>
+        <button id ="reset-button" class="game-button">Reset</button>
     </div>
     <!-- Add particles -->
     <div id="input-form-particle" style="display: none;">
@@ -39,13 +44,17 @@
 
    <!-- Add rule -->
     <div id="input-form-add-rule" style="display: none;">
-      <input type="text" class="inputFormElement" placeholder="Enter particle A ID">
-      <input type="text" class="inputFormElement" placeholder="Enter particle B ID">
-      <input type="range"class="inputFormElement" value="1" min="0" max="1" step="0.1" name="Gravity">
-        <input type="submit" class="game-button inputFormElement" onclick="revealDiv('input-form-add-rule')">
+      <input type="text" id="ida" class="inputFormElement" placeholder="Enter particle A ID">
+      <input type="text" id="idb" class="inputFormElement" placeholder="Enter particle B ID">
+      <input type="range" id="slider" class="inputFormElement" value="1" min="-2" max="2" step="0.1" name="Gravity">
+        <input type="submit" id="submit-rule"class="game-button inputFormElement" onclick="revealDiv('input-form-add-rule')">
     </div>
 
     <script src="petri.js"></script>
     <script src="buttonControl.js"></script>
+
+    <!-- NTC -->
+    <script type="text/javascript" src="https://chir.ag/projects/ntc/ntc.js"></script>
+
 </body>
 </html>
