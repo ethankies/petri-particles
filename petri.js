@@ -56,30 +56,42 @@ rule=(particleA, particleB, gravity)=>{
 }
 
 
+var fFamily = '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif'
+
 function setup() {
    var cnv = createCanvas(500, 500);
-   textFont('-apple-system');
+
     cnv.parent("canvas-container"); 
-    yellowP = spawn(50, "yellow", 0)
+    yellowP = spawn(50, "orange", 0)
     greenP = spawn(50, "green", 1)    
     ids[0] = yellowP;
     ids[1] = greenP;
     //Add elems to div
+    var div = createDiv("Particle ID");
+    div.style('font-weight', 'bold')
+    styleDiv(div);
     for(var i = 0; i < ids.length; i++){
 
         var div = createDiv("Particle #" + i + " (" + ids[i][0].color+")");
-        div.style('font-size', '16px');
-        div.parent('particle-holder')
+       styleDiv(div)
+        // div.style('font-size', '16px');
+       // div.style('font-family', fFamily)
+       // div.parent('particle-holder')
 
     }
 
    // rule(yellowP, yellowP, 1)
    // rule(greenP, yellowP, 1)
+    console.log(random() - 0.5)
+    var ruleDiv = createDiv("Rules");
+    styleRule(ruleDiv)
+    ruleDiv.style("font-weight", 'bold')
+    rules.push([yellowP, yellowP, (random() - 0.25)]);
+    
+    createRuleDiv()
 
-    rules.push([yellowP, yellowP, 1]);
-    rules.push([greenP, yellowP, 1]);
-
-   
+    rules.push([greenP, yellowP, random() - 0.5]);
+    createRuleDiv()
 
   }
  
@@ -109,16 +121,16 @@ function RepelTutorial(){
     rule(yellow, yellow, 1)
 }
 
-//Reset reloads the page
-var resetButton = document.getElementById("reset-button")
-resetButton.onclick = function(){
+//clear reloads the page
+var clearButton = document.getElementById("clear-button")
+clearButton.onclick = function(){
     console.log("Reload window...")
     window.location.reload();
 }
 
-//Restart puts the particles at random places
-var restart = document.getElementById("restart")
-restart.onclick = function(){
+//reset puts the particles at random places
+var resetButton = document.getElementById("reset")
+resetButton.onclick = function(){
     console.log("Restarting particles")
     for(var i = 0; i < particles.length; i++){    
         particles[i].x = randomPos();
@@ -138,12 +150,8 @@ function getNewParticle(){
     
     var n_match = ntc.name(color);
 
-  
-
     var div = createDiv("Particle #" + newParticle[0].id + " (" + n_match[1] + ")");
-    div.style('font-size', '16px');
-    div.parent('particle-holder')
-   
+    styleDiv(div)
     ids.push(newParticle)
 }
 
@@ -159,11 +167,60 @@ addRuleButton.onclick = function(){
 function getNewRule(){
     var ida = document.getElementById("ida").value;
     var idb = document.getElementById("idb").value;;
-
-    
-
     var g = document.getElementById("slider").value;
-
-
     rules.push([ids[ida], ids[idb], g]);
+   // var ruleDiv = createDiv([ids[ida][0], ids[idb][0], g])
+   createRuleDiv()
+
+}
+
+function styleDiv(div){
+    div.style('font-size', '16px');
+    div.style('font-family', fFamily)
+    
+    div.style('color', '#3D3D3D')
+    div.parent('particle-holder')
+}
+
+function styleRule(div){
+    div.style('font-size', '16px');
+    div.style('font-family', fFamily)
+    
+    div.style('color', '#3D3D3D')
+    div.parent('rule-holder')
+}
+
+function createRuleDiv(){
+    var g = rules[rules.length-1][2]
+
+   // var rgb1 = "rgba(" + color(rules[rules.length-1][0][0].color).levels + ")"
+ //   var rgb2= "rgba(" + color(rules[rules.length-1][0][1].color).levels + ")"
+
+
+  //  var color1 = ntc.name()
+  //  var color2 = ntc.name()
+  //  console.log(color1[1])
+  var color1 = rules[rules.length-1][0][0].color
+  var color2 = rules[rules.length-1][1][0].color
+  console.log(rules)
+  if(color1.charAt(0) == '#'){
+    //convert from hex to string with ntc
+    var match = ntc.name(color1);
+    color1 = match[1];
+
+  }
+  if(color2.charAt(0) == '#'){
+    //convert from hex to string with ntc
+    var match = ntc.name(color2);
+    color2 = match[1];
+
+  }
+
+  console.log(color1 + color2)
+   var ruleDiv = createDiv(color1 + " <> "  + color2 + " " + round(g, 2)+'g')
+    //rules[0] is the first rule
+    //[0][0][0] is the first particle in first rule
+    //[0][0][1] is the second particle in first rule
+    //[0][2] is the g  in first rule
+    styleRule(ruleDiv)
 }
