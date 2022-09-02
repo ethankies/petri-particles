@@ -61,9 +61,11 @@ var fFamily = '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ub
 function setup() {
    var cnv = createCanvas(500, 500);
 
+   console.log(color(random(0,255), random(0,255), random(0,255)).toString())
+//spawn can only take a hex or a string
     cnv.parent("canvas-container"); 
-    yellowP = spawn(50, "orange", 0)
-    greenP = spawn(50, "green", 1)    
+    yellowP = spawn(50, '#' + Math.floor(Math.random()*16777215).toString(16), 0)
+    greenP = spawn(50, '#' + Math.floor(Math.random()*16777215).toString(16), 1)    
     ids[0] = yellowP;
     ids[1] = greenP;
     //Add elems to div
@@ -71,12 +73,11 @@ function setup() {
     div.style('font-weight', 'bold')
     styleDiv(div);
     for(var i = 0; i < ids.length; i++){
+    var match = ntc.name(ids[i][0].color);
+    color = match[1];
 
-        var div = createDiv("Particle #" + i + " (" + ids[i][0].color+")");
+    var div = createDiv("Particle #" + i + " (" + color +")");
        styleDiv(div)
-        // div.style('font-size', '16px');
-       // div.style('font-family', fFamily)
-       // div.parent('particle-holder')
 
     }
 
@@ -103,7 +104,7 @@ function setup() {
     //array of rules
     //arr[0] = {yellowP, yellowP, 1}
     //foreach rule(arr[i][0])
-    background('lightcoral')
+    background('rgb(28, 28, 30)')
         particles.forEach(element=>{
             fill(element.color)
             circle(element.x, element.y, 10)
@@ -147,10 +148,17 @@ function getNewParticle(){
         return;
     }
     var newParticle = spawn(numParticles, color, ids.length);
-    
-    var n_match = ntc.name(color);
+    console.log(color)
+    if(color.charAt(0) == '#'){
+        //convert from hex to string with ntc
+        var match = ntc.name(color);
+        color = match[1];
 
-    var div = createDiv("Particle #" + newParticle[0].id + " (" + n_match[1] + ")");
+    
+      }
+  //  var n_match = ntc.name(color);
+
+    var div = createDiv("Particle #" + newParticle[0].id + " (" + color + ")");
     styleDiv(div)
     ids.push(newParticle)
 }
@@ -185,24 +193,18 @@ function styleDiv(div){
 function styleRule(div){
     div.style('font-size', '16px');
     div.style('font-family', fFamily)
-    
+
+    div.style('border-bottom', '3px dotted rgb(0, 122, 255)')
+    div.style('padding-bottom', '5px')
     div.style('color', '#3D3D3D')
     div.parent('rule-holder')
 }
 
 function createRuleDiv(){
-    var g = rules[rules.length-1][2]
+ var g = rules[rules.length-1][2]
 
-   // var rgb1 = "rgba(" + color(rules[rules.length-1][0][0].color).levels + ")"
- //   var rgb2= "rgba(" + color(rules[rules.length-1][0][1].color).levels + ")"
-
-
-  //  var color1 = ntc.name()
-  //  var color2 = ntc.name()
-  //  console.log(color1[1])
   var color1 = rules[rules.length-1][0][0].color
   var color2 = rules[rules.length-1][1][0].color
-  console.log(rules)
   if(color1.charAt(0) == '#'){
     //convert from hex to string with ntc
     var match = ntc.name(color1);
@@ -216,7 +218,7 @@ function createRuleDiv(){
 
   }
 
-  console.log(color1 + color2)
+
    var ruleDiv = createDiv(color1 + " <> "  + color2 + " " + round(g, 2)+'g')
     //rules[0] is the first rule
     //[0][0][0] is the first particle in first rule
