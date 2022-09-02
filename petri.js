@@ -83,7 +83,7 @@ function setup() {
 
    // rule(yellowP, yellowP, 1)
    // rule(greenP, yellowP, 1)
-    console.log(random() - 0.5)
+
     var ruleDiv = createDiv("Rules");
     styleRule(ruleDiv)
     ruleDiv.style("font-weight", 'bold')
@@ -96,31 +96,31 @@ function setup() {
     //createRuleDiv()
 
     /* Nucleus */
-    // rules.push([pone, ptwo, -0.1]);
-    // createRuleDiv()
-    // rules.push([pone, ptwo, -0.01]);
-    // createRuleDiv()
-    // rules.push([ptwo, pone, 0.01]);
-    // createRuleDiv()
+    rules.push([pone, pone, -0.1]);
+    createRuleDiv()
+    rules.push([pone, ptwo, -0.01]);
+    createRuleDiv()
+    rules.push([ptwo, pone, 0.01]);
+    createRuleDiv()
 
 
     /*flying machine shape*/
-    pthree = spawn(50, '#' + Math.floor(Math.random()*16777215).toString(16), 2)
-    ids[2]
-    rules.push([pone, pone, -0.32]);
-    createRuleDiv()
-    rules.push([pone, ptwo, -0.17]);
-    createRuleDiv()
-    rules.push([pone, pthree, 0.34]);
-    createRuleDiv()
-    rules.push([ptwo, ptwo, -0.10]);
-    createRuleDiv()
-    rules.push([pone, pone, -0.34]);
-    createRuleDiv()
-    rules.push([pthree, pthree, 0.15]);
-    createRuleDiv()
-    rules.push([pthree, pone, -0.20]);
-    createRuleDiv()
+    // pthree = spawn(50, '#' + Math.floor(Math.random()*16777215).toString(16), 2)
+    // ids[2]
+    // rules.push([pone, pone, -0.32]);
+    // createRuleDiv()
+    // rules.push([pone, ptwo, -0.17]);
+    // createRuleDiv()
+    // rules.push([pone, pthree, 0.34]);
+    // createRuleDiv()
+    // rules.push([ptwo, ptwo, -0.10]);
+    // createRuleDiv()
+    // rules.push([pone, pone, -0.34]);
+    // createRuleDiv()
+    // rules.push([pthree, pthree, 0.15]);
+    // createRuleDiv()
+    // rules.push([pthree, pone, -0.20]);
+    // createRuleDiv()
     
   }
  
