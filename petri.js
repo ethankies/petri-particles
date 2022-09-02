@@ -33,7 +33,7 @@ rule=(particleA, particleB, gravity)=>{
             d = Math.sqrt(dx*dx + dy*dy)
         
             if(d > 0 && d < 80){ //limit force to 80
-                F = gravity * 1/d
+                F = (gravity * 1) / d
                 fx += (F * dx)
                 fy += (F * dy)
             }

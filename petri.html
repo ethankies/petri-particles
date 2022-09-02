@@ -13,7 +13,7 @@
     <!-- KoFi Donate -->
     <!-- petri.life -->
     <div id="upper-text" >
-        <h1>Petri.life</h1>
+        <h1>Petri Particles</h1>
         <h2>Complexity from simplicity</h2>
     </div>
     <div id = "canvas-text-container">
@@ -52,9 +52,11 @@
     <div id="input-form-add-rule" style="display: none;">
       <input type="text" id="ida" class="inputFormElement" placeholder="Enter particle A ID">
       <input type="text" id="idb" class="inputFormElement" placeholder="Enter particle B ID">
-      <label>test</label>
-      <input type="range" id="slider" class="inputFormElement" value="1" min="-2" max="2" step="0.1" name="Gravity">
-        <input type="submit" id="submit-rule"class="game-button inputFormElement" onclick="revealDiv('input-form-add-rule')">
+      <output>f</output>
+      <input  type="range" id="slider" class="inputFormElement" value="1" min="-2" max="2" step="0.1" name="Gravity" oninput="this.previousElementSibling.value = this.value" >
+   
+      
+      <input type="submit" id="submit-rule"class="game-button inputFormElement" onclick="revealDiv('input-form-add-rule')">
     </div>
 
     <script src="petri.js"></script>

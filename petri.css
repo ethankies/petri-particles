@@ -136,3 +136,9 @@ input[type="color"]::-webkit-color-swatch {
 input.game-button.inputFormElement{
     color: green;
 }
+
+output {
+    display: block;
+    margin-top: 6px;
+    width: 50px;
+}
