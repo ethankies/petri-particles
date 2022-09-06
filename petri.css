@@ -65,10 +65,7 @@ canvas {
    
 }
 
-#add-particle{
-    background: rgb(0, 122, 255);
-    color: white;
-}
+
 
 body {
     background-color: white;
@@ -89,7 +86,7 @@ h1,h2{
   border-radius: 15px;
   /* color: #3D3D3D; */
   color: rgb(0, 122, 255);
-  border: 2px solid rgb(0, 122, 255);
+  border: 2px solid #007aff;
   background: #fff;
  
   box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1);
@@ -98,12 +95,21 @@ h1,h2{
   touch-action: manipulation;
   margin-right: 10px;
 }
-
+.selected-button{
+    color: white;
+    background-color: rgb(0, 122, 255);
+}
  .game-button:hover {
   box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
   outline: 0;
+  color: white;
+    background-color: rgb(0, 122, 255);
 } 
 
+#clear-button{
+    color: rgb(255, 59, 48);
+    border: 2px solid rgb(255, 59, 48);
+}
 
 #input-form-particle,#input-form-particle-remove,#input-form-add-rule{
     margin-top: 12px;

@@ -96,12 +96,12 @@ function setup() {
     //createRuleDiv()
 
     /* Nucleus */
-    rules.push([pone, pone, -0.1]);
-    createRuleDiv()
-    rules.push([pone, ptwo, -0.01]);
-    createRuleDiv()
-    rules.push([ptwo, pone, 0.01]);
-    createRuleDiv()
+    // rules.push([pone, pone, -0.1]);
+    // createRuleDiv()
+    // rules.push([pone, ptwo, -0.01]);
+    // createRuleDiv()
+    // rules.push([ptwo, pone, 0.01]);
+    // createRuleDiv()
 
 
     /*flying machine shape*/
@@ -214,7 +214,7 @@ function styleDiv(div){
     div.style('font-size', '16px');
     div.style('font-family', fFamily)
     
-    div.style('color', '#3D3D3D')
+  //  div.style('color', '#3D3D3D')
     div.parent('particle-holder')
 }
 
@@ -224,7 +224,7 @@ function styleRule(div){
 
     div.style('border-bottom', '3px dotted rgb(0, 122, 255)')
     div.style('padding-bottom', '5px')
-    div.style('color', '#3D3D3D')
+ //   div.style('color', '#3D3D3D')
     div.parent('rule-holder')
 }
 
