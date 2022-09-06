@@ -86,8 +86,8 @@ h1,h2{
   border-radius: 15px;
   /* color: #3D3D3D; */
   color: rgb(0, 122, 255);
-  border: 2px solid #007aff;
-  background: #fff;
+border: none;
+  background: hsla(211, 100%, 50%, 0.173);
  
   box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1);
   user-select: none;
@@ -98,23 +98,35 @@ h1,h2{
 .selected-button{
     color: white;
     background-color: rgb(0, 122, 255);
+
+
+    /* border: 2px solid #007aff; */
+    /* box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5); */
 }
  .game-button:hover {
-  box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+  /* box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5); */
   outline: 0;
   color: white;
     background-color: rgb(0, 122, 255);
+    
+    
 } 
 
 #clear-button{
-    color: rgb(255, 59, 48);
-    border: 2px solid rgb(255, 59, 48);
+    color: rgb(0, 122, 255);
+    background-color: rgba(255, 58, 48, 0.173);
+    /* border: 2px solid rgb(255, 59, 48); */
+}
+#clear-button:hover {
+    background-color: rgba(255, 58, 48, 0.571);
 }
 
 #input-form-particle,#input-form-particle-remove,#input-form-add-rule{
     margin-top: 12px;
     display: flex;
     justify-content: center;
+  
+
 }
 
 
@@ -137,10 +149,16 @@ input[type="color"]::-webkit-color-swatch {
 
 .inputFormElement{
     margin-right: 10px;
+  
 }
 
 input.game-button.inputFormElement{
-    color: green;
+    color: rgba(52, 199, 91);
+    background-color: rgba(52, 199, 91, 0.173);
+}
+input.game-button.inputFormElement:hover{
+    color: white;
+    background-color: rgb(52, 199, 90);
 }
 
 output {

@@ -151,20 +151,21 @@ function RepelTutorial(){
 }
 
 //clear reloads the page
-var clearButton = document.getElementById("clear-button")
-clearButton.onclick = function(){
-    console.log("Reload window...")
-    window.location.reload();
-}
+// var clearButton = document.getElementById("clear-button")
+// clearButton.onclick = function(){
+//     console.log("Reload window...")
+//     window.location.reload();
+// }
 
 //reset puts the particles at random places
 var resetButton = document.getElementById("reset")
 resetButton.onclick = function(){
-    console.log("Restarting particles")
+
     for(var i = 0; i < particles.length; i++){    
         particles[i].x = randomPos();
         particles[i].y = randomPos();
     }
+
 }
 
 function getNewParticle(){
@@ -184,7 +185,6 @@ function getNewParticle(){
 
     
       }
-  //  var n_match = ntc.name(color);
 
     var div = createDiv("Particle #" + newParticle[0].id + " (" + color + ")");
     styleDiv(div)
