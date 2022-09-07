@@ -9,7 +9,7 @@ canvas {
 
     padding-left: 0;
     padding-right: 0;
-    margin-left: auto;
+    /* margin-left: auto; */
     margin-right: auto;
     display: block;
    
@@ -30,7 +30,7 @@ body {
 #canvas-container {
     /* margin-left: auto; */
     position: relative;
-
+  
     width: 500px;
     height: 500px;
 
@@ -95,7 +95,18 @@ body {
     justify-content: center;
 
 }
-
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
 
 body {
     background-color: rgb(242, 242, 247);
@@ -113,7 +124,10 @@ p {
     color: #3D3D3D;
     font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
 }
-
+a {
+    color: rgb(0, 122, 255);
+    text-decoration: underline;
+}
 /* CSS */
 .game-button {
     display: flex;
@@ -235,12 +249,19 @@ output {
 
 .color-span {
   color: rgb(0, 122, 255);
+
 }
 
-@media(max-width:1024px){
-   * {
-    overflow: hidden;
-   } 
- 
-   
+@media only screen and (max-width: 1024px) {
+   body{
+    display: flex;
+    margin: 0;
+    flex-flow: column wrap;
+    flex-basis: auto;
+    align-content: flex-start;
+    background: rgb(229, 229, 234);
+   }
+  #canvas-text-container {
+    /* position: absolute; */
+   }
   }

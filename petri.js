@@ -102,7 +102,7 @@ function draw() {
     background('rgb(28, 28, 30)')
     particles.forEach(element => {
         fill(element.color)
-        circle(element.x, element.y, 10)
+        circle(element.x, element.y, 5)
 
     })
 
@@ -321,30 +321,6 @@ function refreshRules() {
 }
 
 
-// rules.forEach(rule => {
-//     if (rule[0][0].id == id2 || rule[1][0].id == id2) {
-//         rules.splice(rules.indexOf(rule), 1)
-
-//         function setup() {
-//             var els = document.getElementsByClassName("rule");
-//             for (var i = 0; i < els.length; i++) {
-//                 els[i].addEventListener('click', function (e) {
-//                     e.preventDefault();
-//                     e.target.closest('div.rule').remove();
-//                     //e.target.closest('.image').remove();
-
-//                     //this will not work on 2 last images cause parent div will be deleted 
-//                     //leaving an empty <div class="image"></div> for each removed item
-
-//                     //e.target.closest('div').remove();
-//                 });
-//             }
-//         }
-//         setup();
-//     }
-// })
-
-
 
 
 
@@ -369,11 +345,11 @@ function SwitchToPreset(preset) {
     switch (preset) {
         case 0:
             /* Nucleus */
-            pone = spawn(100, '#aa5042', 0)
-            ptwo = spawn(100, '#d8bd8a', 1)
+            pone = spawn(50, '#aa5042', 0)
+            ptwo = spawn(299, '#d8bd8a', 1)
             rules.push([pone, pone, -0.1]);
             createRuleDiv()
-            rules.push([pone, ptwo, -0.01]);
+            rules.push([pone, ptwo, -0.1]);
             createRuleDiv()
             rules.push([ptwo, pone, 0.01]);
             createRuleDiv()
@@ -399,8 +375,8 @@ function SwitchToPreset(preset) {
         case 1:
             /*flying machine shape*/
             pone = spawn(200, '#adc698', 0)
-            ptwo = spawn(200, '#d0e3c4', 1)
-            pthree = spawn(200, '#503047', 2)
+            ptwo = spawn(100, '#d0e3c4', 1)
+            pthree = spawn(50, '#503047', 2)
 
             ids[0] = pone
             ids[1] = ptwo
@@ -602,12 +578,17 @@ function SwitchToPreset(preset) {
             two = spawn(random(2, 200), '#' + Math.floor(Math.random() * 16777215).toString(16), 1)
             three = spawn(random(2, 200), '#' + Math.floor(Math.random() * 16777215).toString(16), 2)
             four = spawn(random(50, 400), '#' + Math.floor(Math.random() * 16777215).toString(16), 3)
-
+            five = spawn(random(50, 400), '#' + Math.floor(Math.random() * 16777215).toString(16), 4)
             ids[0] = one;
             ids[1] = two;
             ids[2] = three;
             ids[3] = four;
+            ids[4] = five;
 
+            rules.push([random(ids), random(ids), random(-1, 1)]);
+            createRuleDiv()
+            rules.push([random(ids), random(ids), random(-1, 1)]);
+            createRuleDiv()
             rules.push([random(ids), random(ids), random(-1, 1)]);
             createRuleDiv()
             rules.push([random(ids), random(ids), random(-1, 1)]);
@@ -646,6 +627,12 @@ function SwitchToPreset(preset) {
 
             var div = createDiv("Particle #" + four[0].id + " (" + color + ")");
             styleDiv(div, four[0].id)
+
+            var match = ntc.name(ids[2][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + five[0].id + " (" + color + ")");
+            styleDiv(div, five[0].id)
 
     }
     console.log(preset)
