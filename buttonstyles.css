@@ -1,25 +1,24 @@
 .close-button {
-font-size: 12px;
-  flex-direction: row;
-  align-items: center;
-  padding: 3px 7px;
+  font-size: 12px;
+
+  /* padding: 3px 7px; */
   font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-  border-radius: 15px;
+  border-radius: 12px;
   /* color: #3D3D3D; */
-  color: rgb(255, 59, 48);
+  color: rgb(255, 203, 200);
   border: none;
-  background: rgb(255, 59, 48, 0.173);
- 
+  background: rgba(255, 58, 48, 0.704);
+  font-family: 500;
   box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  margin-left: 10px;
+  height: 20px;
+  align-self: center;
+  
   }
 
   .close-button:hover {
     background-color: rgb(255, 59, 48);
     color: white;
+
   }
 
 .preset-button {
@@ -28,4 +27,11 @@ font-size: 12px;
 }
 .preset-button.selected-button {
     background-color:  rgba(0, 123, 255, 1);
+}
+
+.particle-id-div, .rule {
+  display: flex;
+  justify-content: space-between;
+  
+ 
 }

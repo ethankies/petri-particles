@@ -37,8 +37,9 @@
 
 
   <div id="petri-buttons">
-    <button id="add-particle" class="game-button" onclick="revealDiv('input-form-particle','add-particle')">Add Particle</button>
     <button id="add-rule" class="game-button" onclick="revealDiv('input-form-add-rule', 'add-rule')">Add Rule</button>
+    <button id="add-particle" class="game-button" onclick="revealDiv('input-form-particle','add-particle')">Add Particle</button>
+    
     <button id="presets" class="game-button">Presets</button>
     <!-- <button id ="remove-particle" class="game-button" onclick="revealDiv('input-form-particle-remove')">Remove Particle</button> -->
     <button id="reset" class="game-button"><i class='fas fa-sync fa-pull-left fa-3x'></i>Reset</button>
@@ -52,7 +53,7 @@
     <button  class="game-button preset-button" onclick="SwitchToPreset(1)">Flying Bird</button>
     <button class="game-button preset-button" onclick="SwitchToPreset(2)">Experimental 1</button>
     <button class="game-button preset-button" onclick="SwitchToPreset(3)">Experimental 2</button>
-    <button class="game-button preset-button" onclick="SwitchToPreset(5)">Experimental 3</button>
+    <button class="game-button preset-button" onclick="SwitchToPreset(5)">Worm</button>
     <button  class="game-button preset-button" onclick="SwitchToPreset(6)">Random</button>
   </div>
   <!-- Add particles -->
@@ -86,6 +87,12 @@
   <div id="info" style="display: none;">
     <h4>What am I looking at?</h4>
     <p>You are looking at a <a href="https://github.com/hunar4321/particle-life">Particle Life Simulation</a>. This is a website that allows you to interact with particles dicated by simple rules. </p>
+
+    <h4>How do I make it do stuff?</h4>
+    <p>If you just want to poke around, click on the presets tab. Otherwise...</p>
+    <p>Start by <span class="color-span" >adding a rule</span>. Enter the "Particle ID" for each particle to effect. First, <span class="color-span">type "0" into each box.</span> Next, drag the slider in either direction. Click submit.</p>
+    <p>As you can see, the first set of particles are now either repelling (+g) or attracting (-g). Try different combinations of rules, to see the different patterns that can be created with just two sets of patterns.</p>
+    <p>Now, try <span class="color-span">adding more particles</span>. Select a color by clicking the left box. Enter the number of particles you would like to add to the Petri dish.</p>
   </div>
   <script src="petri.js"></script>
   <script src="buttonControl.js"></script>

@@ -1,21 +1,30 @@
+#upper-text {
+    background: rgb(229, 229, 234);
+    margin: 0;
+    padding-top: 25px;
+}
 canvas {
-    border-radius: 12px 0px 0px 12px;
-
+    /* border-radius: 12px 0px 0px 12px; */
+    border-radius: 100px;
 
     padding-left: 0;
     padding-right: 0;
     margin-left: auto;
     margin-right: auto;
     display: block;
-
+   
 
 }
-
+body {
+    margin: 0;
+}
 #canvas-text-container {
 
     /* justify-content: center;
     display: flex; */
-    margin-top: 30px;
+    padding: 25px;
+    margin-top: 0;
+    background: rgb(229, 229, 234);
 }
 
 #canvas-container {
@@ -97,6 +106,7 @@ h1, h2, h3, h4 {
     text-align: center;
     font-weight: 900;
     font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+    margin: 0;
 }
 
 p {
@@ -125,7 +135,7 @@ p {
     font-weight: bold;
 }
 
-.selected-button {
+.selected-button,#add-rule.game-button.selected-button {
     color: white;
     background-color: rgb(0, 122, 255);
 
@@ -134,7 +144,7 @@ p {
     /* box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5); */
 }
 
-.game-button:hover {
+.game-button:hover, #add-rule.game-button:hover {
     /* box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5); */
     outline: 0;
     color: white;
@@ -142,6 +152,13 @@ p {
 
 
 }
+
+#add-rule.game-button {
+    background-color: rgba(0, 123, 255, 0.782);
+    color: white;
+}
+
+
 
 #clear-button {
     color: rgb(0, 122, 255);
@@ -162,6 +179,8 @@ p {
 
 
 }
+
+
 
 
 input[type="color"] {
@@ -213,3 +232,15 @@ output {
     border-radius: 12px;
     display: block;
 }
+
+.color-span {
+  color: rgb(0, 122, 255);
+}
+
+@media(max-width:1024px){
+   * {
+    overflow: hidden;
+   } 
+ 
+   
+  }
