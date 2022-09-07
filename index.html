@@ -21,7 +21,11 @@
     <!-- <h2>Complexity from simplicity</h2> -->
   </div>
   <div id="canvas-text-container">
+    
     <div id="canvas-container">
+      <div><!-- id="left-column" -->
+      
+      </div>
       <div id="right-column">
         <div id="particle-holder"></div>
         <div id="rule-holder"></div>
@@ -38,15 +42,18 @@
     <button id="presets" class="game-button">Presets</button>
     <!-- <button id ="remove-particle" class="game-button" onclick="revealDiv('input-form-particle-remove')">Remove Particle</button> -->
     <button id="reset" class="game-button"><i class='fas fa-sync fa-pull-left fa-3x'></i>Reset</button>
+    <button id="question-mark" class="game-button"><i class='fas fa-sync fa-pull-left fa-3x'></i><b>?</b></button>
     <!-- <button id ="clear-button" class="game-button"><i class="fa fa-trash"></i></button> -->
-    <select name="dog-names" id="dog-names">
 
-      <option value="rigatoni">Select a preset</option>
-      <option value="Nucleus">Nucleus</option>
-      <option value="Insect">Flying Insect</option>
-      
-    </select>
   </div>
+  </div>
+  <div id="presets-container" style="display: none;">
+    <button  class="game-button preset-button" onclick="SwitchToPreset(0)">Nucleus</button>
+    <button  class="game-button preset-button" onclick="SwitchToPreset(1)">Flying Bird</button>
+    <button class="game-button preset-button" onclick="SwitchToPreset(2)">Experimental 1</button>
+    <button class="game-button preset-button" onclick="SwitchToPreset(3)">Experimental 2</button>
+    <button class="game-button preset-button" onclick="SwitchToPreset(5)">Experimental 3</button>
+    <button  class="game-button preset-button" onclick="SwitchToPreset(6)">Random</button>
   </div>
   <!-- Add particles -->
   <div id="input-form-particle" style="display: none;">
@@ -76,6 +83,10 @@
       onclick="revealDiv('input-form-add-rule')">
   </div>
 
+  <div id="info" style="display: none;">
+    <h4>What am I looking at?</h4>
+    <p>You are looking at a <a href="https://github.com/hunar4321/particle-life">Particle Life Simulation</a>. This is a website that allows you to interact with particles dicated by simple rules. </p>
+  </div>
   <script src="petri.js"></script>
   <script src="buttonControl.js"></script>
 

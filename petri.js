@@ -2,6 +2,7 @@
 particles = []
 ids = [] // stores id of each type of particle
 rules = []
+ruleDivs = []
 particle = (x, y, c, id) => {
     return { "x": x, "y": y, "vx": 0, "vy": 0, "color": c, "id": id }
 }
@@ -81,54 +82,12 @@ function setup() {
 
         var div = createDiv("Particle #" + i + " (" + color + ")");
         styleDiv(div, i)
-        
 
     }
-
-
-
-
-
-    // rule(yellowP, yellowP, 1)
-    // rule(greenP, yellowP, 1)
 
     var ruleDiv = createDiv("Rules");
     styleRule(ruleDiv)
     ruleDiv.style("font-weight", 'bold')
-
-    // rules.push([yellowP, yellowP, (random() - 0.25)]);
-
-    //createRuleDiv()
-
-    //rules.push([greenP, yellowP, random() - 0.5]);
-    //createRuleDiv()
-
-    /* Nucleus */
-    // rules.push([pone, pone, -0.1]);
-    // createRuleDiv()
-    // rules.push([pone, ptwo, -0.01]);
-    // createRuleDiv()
-    // rules.push([ptwo, pone, 0.01]);
-    // createRuleDiv()
-
-
-    /*flying machine shape*/
-    // pthree = spawn(50, '#' + Math.floor(Math.random()*16777215).toString(16), 2)
-    // ids[2]
-    // rules.push([pone, pone, -0.32]);
-    // createRuleDiv()
-    // rules.push([pone, ptwo, -0.17]);
-    // createRuleDiv()
-    // rules.push([pone, pthree, 0.34]);
-    // createRuleDiv()
-    // rules.push([ptwo, ptwo, -0.10]);
-    // createRuleDiv()
-    // rules.push([pone, pone, -0.34]);
-    // createRuleDiv()
-    // rules.push([pthree, pthree, 0.15]);
-    // createRuleDiv()
-    // rules.push([pthree, pone, -0.20]);
-    // createRuleDiv()
 
 }
 
@@ -195,10 +154,10 @@ function getNewParticle() {
     }
 
     var div = createDiv("Particle #" + newParticle[0].id + " (" + color + ")");
-    styleDiv(div,newParticle[0].id)
+    styleDiv(div, newParticle[0].id)
     ids.push(newParticle)
-    
-    
+
+
 }
 
 
@@ -211,47 +170,49 @@ addRuleButton.onclick = function () {
     getNewRule()
 }
 function getNewRule() {
+    var ruleID = rules.length;
     var ida = document.getElementById("ida").value;
     var idb = document.getElementById("idb").value;;
     var g = document.getElementById("slider").value;
-    rules.push([ids[ida], ids[idb], g]);
+    rules.push([ids[ida], ids[idb], g, ruleID]);
     // var ruleDiv = createDiv([ids[ida][0], ids[idb][0], g])
     createRuleDiv()
 
 }
 
-function styleDiv(div,id) {
+function styleDiv(div, id) {
     div.style('font-size', '16px');
     div.style('font-family', fFamily)
     div.addClass(id)
-
+    div.addClass("particle-id-div")
 
     div.parent('particle-holder')
 
-  
 
-    console.log(div.html() == "Particle ID")
-    if(!(div.html() == "Particle ID")){
-        var btn = createButton('x')
+
+
+    if (!(div.html() == "Particle ID")) {
+        var btn = createButton('Remove')
+
+        btn.addClass("close-button")
         btn.parent(div)
-        btn.mousePressed(function(){
+        btn.mousePressed(function () {
             //remove particle
-            alert(id)
-        
+
             //remove every particle from particles with the id of id
-            refreshParticles(id)  
-            
+            refreshParticles(id)
+
             //remove list of ids
-            ids.splice(id,1)
+            ids.splice(id, 1)
 
         })
 
     }
 
- 
+
 }
 
-function styleRule(div,id1, id2) {
+function styleRule(div, id1, id2) {
     div.style('font-size', '16px');
     div.style('font-family', fFamily)
 
@@ -264,19 +225,30 @@ function styleRule(div,id1, id2) {
     div.addClass("rule")
 
     console.log(rules)
-    if(!(div.class() == "undefined")){
-        var btn = createButton('x')
+    if (!(div.class() == "undefined rule")) {
+        var btn = createButton('Remove')
+        btn.addClass("close-button")
         btn.parent(div)
-        btn.mousePressed(function(){
+        btn.mousePressed(function () {
             //remove particle
-          
-        
-            refreshRules(id1, id2)
-
+            //refreshRules(id1, id2, ruleDivs.indexOf(div))
+            console.log(ruleDivs.indexOf(div))
+            rules.splice([ruleDivs.indexOf(div)], 1)
+            ruleDivs.splice([ruleDivs.indexOf(div)], 1)
+            function removeDiv() {
+                var els = document.getElementsByClassName("rule");
+                for (var i = 0; i < els.length; i++) {
+                    els[i].addEventListener('click', function (e) {
+                        e.preventDefault();
+                        e.target.closest('div.rule').remove();
+                    });
+                }
+            }
+            removeDiv();
         })
 
     }
-   
+
 }
 
 function createRuleDiv() {
@@ -298,55 +270,389 @@ function createRuleDiv() {
     }
 
 
-    var ruleDiv = createDiv(color1 + " <> " + color2 + " " + round(g, 2) + 'g')
+    var ruleDiv = createDiv(color1 + " >>> " + color2 + " " + round(g, 2) + 'g')
     //rules[0] is the first rule
     //[0][0][0] is the first particle in first rule
     //[0][0][1] is the second particle in first rule
     //[0][2] is the g  in first rule
 
-    styleRule(ruleDiv, rules[rules.length - 1][0][0].id,  rules[rules.length - 1][1][0].id)
-
+    styleRule(ruleDiv, rules[rules.length - 1][0][0].id, rules[rules.length - 1][1][0].id)
+    ruleDivs.push(ruleDiv)
+    console.log(ruleDivs)
 }
 
-function refreshParticles(id){
+function refreshParticles(id) {
     //after particle is removed, we need to refresh
     var counter = 0
-    for(var i =  particles.length -1; i >= 0; i--){
-        if(particles[i].id == id){
+    for (var i = particles.length - 1; i >= 0; i--) {
+        if (particles[i].id == id) {
 
             particles.splice(i, 1)
-           counter++       
+            counter++
         }
     }
 
     const elements = document.getElementsByClassName(id);
-    while(elements.length > 0){
+    while (elements.length > 0) {
         elements[0].parentNode.removeChild(elements[0]);
     }
-    
+
 }
 
 
-function refreshRules(id1, id2){
-    
+function refreshRules() {
 
-    rules.forEach(rule =>{
-        if(rule[0][0].id == id1 || rule[1][0].id == id1 ){
-            rules.splice(rules.indexOf(rule),1)
+    const rules = document.querySelectorAll('.rule:not(.undefined)');
 
-            const elements = document.getElementsByClassName("rule"+id);
-            while(elements.length > 0){
-                elements[0].parentNode.removeChild(elements[0]);
-            }
-        }
-    })
+    rules.forEach(box => {
+        console.log()
 
-    
-    rules.forEach(rule =>{
-        if(rule[0][0].id == id2 || rule[1][0].id == id2){
-            rules.splice(rules.indexOf(rule),1)
-        }
-    })
+        box.remove();
+    });
+
+    const particles = document.querySelectorAll('.particle-id-div:not(.undefined)');
+
+    particles.forEach(box => {
+        console.log()
+
+        box.remove();
+    });
+
+}
 
 
+// rules.forEach(rule => {
+//     if (rule[0][0].id == id2 || rule[1][0].id == id2) {
+//         rules.splice(rules.indexOf(rule), 1)
+
+//         function setup() {
+//             var els = document.getElementsByClassName("rule");
+//             for (var i = 0; i < els.length; i++) {
+//                 els[i].addEventListener('click', function (e) {
+//                     e.preventDefault();
+//                     e.target.closest('div.rule').remove();
+//                     //e.target.closest('.image').remove();
+
+//                     //this will not work on 2 last images cause parent div will be deleted 
+//                     //leaving an empty <div class="image"></div> for each removed item
+
+//                     //e.target.closest('div').remove();
+//                 });
+//             }
+//         }
+//         setup();
+//     }
+// })
+
+
+
+
+
+//clear all particles and rules
+// add new particles and new rules
+// mechanism to switch between presets
+
+//rules array that needs to be cleared
+//particles array that needs to be cleared
+
+//various arrays that act as presets that can be pushed into particle and rule arrays
+
+function SwitchToPreset(preset) {
+    //preset can be 0, 1, 2, 3, 4
+
+    //First remove all particles, ids, and rules
+    ClearArrays()
+    refreshRules()
+
+
+    //detect which case and assign new rules
+    switch (preset) {
+        case 0:
+            /* Nucleus */
+            pone = spawn(100, '#aa5042', 0)
+            ptwo = spawn(100, '#d8bd8a', 1)
+            rules.push([pone, pone, -0.1]);
+            createRuleDiv()
+            rules.push([pone, ptwo, -0.01]);
+            createRuleDiv()
+            rules.push([ptwo, pone, 0.01]);
+            createRuleDiv()
+
+            ids[0] = pone;
+            ids[1] = ptwo;
+
+            var match = ntc.name(ids[0][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + pone[0].id + " (" + color + ")");
+            styleDiv(div, pone[0].id)
+
+
+            var match = ntc.name(ids[1][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + ptwo[0].id + " (" + color + ")");
+            styleDiv(div, ptwo[0].id)
+
+
+            break;
+        case 1:
+            /*flying machine shape*/
+            pone = spawn(200, '#adc698', 0)
+            ptwo = spawn(200, '#d0e3c4', 1)
+            pthree = spawn(200, '#503047', 2)
+
+            ids[0] = pone
+            ids[1] = ptwo
+            ids[2] = pthree
+
+            rules.push([pone, pone, -0.32]);
+            createRuleDiv()
+            rules.push([pone, ptwo, -0.17]);
+            createRuleDiv()
+            rules.push([pone, pthree, 0.34]);
+            createRuleDiv()
+            rules.push([ptwo, ptwo, -0.10]);
+            createRuleDiv()
+            rules.push([pone, pone, -0.34]);
+            createRuleDiv()
+            rules.push([pthree, pthree, 0.15]);
+            createRuleDiv()
+            rules.push([pthree, pone, -0.20]);
+            createRuleDiv()
+
+            var match = ntc.name(ids[0][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + pone[0].id + " (" + color + ")");
+            styleDiv(div, pone[0].id)
+
+            var match = ntc.name(ids[1][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + ptwo[0].id + " (" + color + ")");
+            styleDiv(div, ptwo[0].id)
+
+            var match = ntc.name(ids[2][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + pthree[0].id + " (" + color + ")");
+            styleDiv(div, pthree[0].id)
+            break;
+
+        case 2:
+            // new creation hehe
+            one = spawn(200, '#f4c92f' , 0)
+            two = spawn(100, '#82da1c'  , 1)
+            three = spawn(200, '#17ba6e' , 2)
+            four = spawn(100, '#8499eb', 3)
+
+            ids[0] = one;
+            ids[1] = two;
+            ids[2] = three;
+            ids[3] = four;
+
+            rules.push([one, two, 0.05]);
+            createRuleDiv()
+            rules.push([two, three, 0.05]);
+            createRuleDiv()
+            rules.push([three, four, 0.05]);
+            createRuleDiv()
+             rules.push([four, one, 0.05]);
+             createRuleDiv()
+            // rules.push([four, four, 0.04]);
+            // createRuleDiv()
+            // rules.push([three, three, 0.15]);
+            // createRuleDiv()
+            // rules.push([two, two, 0.01]);
+            // createRuleDiv()
+
+            var match = ntc.name(ids[1][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + one[0].id + " (" + color + ")");
+            styleDiv(div, ptwo[0].id)
+
+            var match = ntc.name(ids[0][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + two[0].id + " (" + color + ")");
+            styleDiv(div, two[0].id)
+
+            var match = ntc.name(ids[1][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + three[0].id + " (" + color + ")");
+            styleDiv(div, three[0].id)
+
+            var match = ntc.name(ids[2][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + four[0].id + " (" + color + ")");
+            styleDiv(div, four[0].id)
+            break;
+        case 3:
+            // new creation hehe
+            one = spawn(200, '#f4c92f' , 0)
+            two = spawn(100, '#82da1c'  , 1)
+            three = spawn(200, '#17ba6e' , 2)
+            four = spawn(100, '#8499eb', 3)
+
+            ids[0] = one;
+            ids[1] = two;
+            ids[2] = three;
+            ids[3] = four;
+
+            rules.push([one, two, 0.05]);
+            createRuleDiv()
+            rules.push([two, three, 0.05]);
+            createRuleDiv()
+            rules.push([three, four, 0.05]);
+            createRuleDiv()
+             rules.push([four, one, 0.05]);
+             createRuleDiv()
+            // rules.push([four, four, 0.04]);
+            // createRuleDiv()
+            // rules.push([three, three, 0.15]);
+            // createRuleDiv()
+            // rules.push([two, two, 0.01]);
+            // createRuleDiv()
+
+            var match = ntc.name(ids[1][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + one[0].id + " (" + color + ")");
+            styleDiv(div, ptwo[0].id)
+
+            var match = ntc.name(ids[0][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + two[0].id + " (" + color + ")");
+            styleDiv(div, two[0].id)
+
+            var match = ntc.name(ids[1][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + three[0].id + " (" + color + ")");
+            styleDiv(div, three[0].id)
+
+            var match = ntc.name(ids[2][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + four[0].id + " (" + color + ")");
+            styleDiv(div, four[0].id)
+            break;
+        case 4:
+            day = "Thursday";
+            break;
+        case 5:
+            // new creation hehe
+            one = spawn(200, '#f4c92f' , 0)
+            two = spawn(100, '#82da1c'  , 1)
+            three = spawn(200, '#17ba6e' , 2)
+            four = spawn(100, '#8499eb', 3)
+
+            ids[0] = one;
+            ids[1] = two;
+            ids[2] = three;
+            ids[3] = four;
+
+            rules.push([one, one, 0.05]);
+            createRuleDiv()
+            rules.push([two, two, 0.05]);
+            createRuleDiv()
+            rules.push([three, three, -0.05]);
+            createRuleDiv()
+             rules.push([four, four, -0.05]);
+             createRuleDiv()
+             rules.push([two, three, 0.1]);
+             createRuleDiv()
+             rules.push([three, three, 0.05]);
+             createRuleDiv()
+             rules.push([one, four, -0.1]);
+             createRuleDiv()
+
+            var match = ntc.name(ids[1][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + one[0].id + " (" + color + ")");
+            styleDiv(div, ptwo[0].id)
+
+            var match = ntc.name(ids[0][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + two[0].id + " (" + color + ")");
+            styleDiv(div, two[0].id)
+
+            var match = ntc.name(ids[1][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + three[0].id + " (" + color + ")");
+            styleDiv(div, three[0].id)
+
+            var match = ntc.name(ids[2][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + four[0].id + " (" + color + ")");
+            styleDiv(div, four[0].id)
+            break;
+        case 6:
+            /*Random*/
+            one = spawn(random(2, 200), '#' + Math.floor(Math.random() * 16777215).toString(16), 0)
+            two = spawn(random(2, 200), '#' + Math.floor(Math.random() * 16777215).toString(16), 1)
+            three = spawn(random(2, 200), '#' + Math.floor(Math.random() * 16777215).toString(16), 2)
+            four = spawn(random(50, 400), '#' + Math.floor(Math.random() * 16777215).toString(16), 3)
+
+            ids[0] = one;
+            ids[1] = two;
+            ids[2] = three;
+            ids[3] = four;
+
+            rules.push([random(ids), random(ids), random(-1, 1)]);
+            createRuleDiv()
+            rules.push([random(ids), random(ids), random(-1, 1)]);
+            createRuleDiv()
+            rules.push([random(ids), random(ids), random(-1, 1)]);
+            createRuleDiv()
+            rules.push([random(ids), random(ids), random(-1, 1)]);
+            createRuleDiv()
+            rules.push([random(ids), random(ids), random(-1, 1)]);
+            createRuleDiv()
+            rules.push([random(ids), random(ids), random(-1, 1)]);
+            createRuleDiv()
+            rules.push([random(ids), random(ids), random(-1, 1)]);
+            createRuleDiv()
+
+            var match = ntc.name(ids[1][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + one[0].id + " (" + color + ")");
+            styleDiv(div, ptwo[0].id)
+
+            var match = ntc.name(ids[0][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + two[0].id + " (" + color + ")");
+            styleDiv(div, two[0].id)
+
+            var match = ntc.name(ids[1][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + three[0].id + " (" + color + ")");
+            styleDiv(div, three[0].id)
+
+            var match = ntc.name(ids[2][0].color);
+            color = match[1];
+
+            var div = createDiv("Particle #" + four[0].id + " (" + color + ")");
+            styleDiv(div, four[0].id)
+
+    }
+    console.log(preset)
+}
+
+function ClearArrays() {
+    rules = []
+    particles = []
+    ids = []
 }
