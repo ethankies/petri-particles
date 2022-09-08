@@ -72,6 +72,7 @@ function setup() {
     ids[0] = pone;
     ids[1] = ptwo;
 
+
     //Add elems to div
     var div = createDiv("Particle ID");
     div.style('font-weight', 'bold')
@@ -88,6 +89,10 @@ function setup() {
     var ruleDiv = createDiv("Rules");
     styleRule(ruleDiv)
     ruleDiv.style("font-weight", 'bold')
+
+    //Add starting rule
+    rules.push([pone, pone, 0.01]);
+    createRuleDiv()
 
 }
 
@@ -117,14 +122,6 @@ function RepelTutorial() {
     rule(yellow, yellow, 1)
 }
 
-//clear reloads the page
-// var clearButton = document.getElementById("clear-button")
-// clearButton.onclick = function(){
-//     console.log("Reload window...")
-//     window.location.reload();
-// }
-
-//reset puts the particles at random places
 var resetButton = document.getElementById("reset")
 resetButton.onclick = function () {
 
@@ -144,7 +141,7 @@ function getNewParticle() {
         return;
     }
     var newParticle = spawn(numParticles, color, ids.length);
-    console.log(color)
+
     if (color.charAt(0) == '#') {
         //convert from hex to string with ntc
         var match = ntc.name(color);
@@ -170,14 +167,23 @@ addRuleButton.onclick = function () {
     getNewRule()
 }
 function getNewRule() {
+    
     var ruleID = rules.length;
     var ida = document.getElementById("ida").value;
     var idb = document.getElementById("idb").value;;
     var g = document.getElementById("slider").value;
-    rules.push([ids[ida], ids[idb], g, ruleID]);
-    // var ruleDiv = createDiv([ids[ida][0], ids[idb][0], g])
-    createRuleDiv()
 
+    var numParticles = ids.length - 1
+    if(ida > numParticles || idb > numParticles || ida < 0 || idb < 0){
+       console.log ("no" + ids.length)
+       alert("Enter a valid particle ID")
+    } else {
+        console.log("idc")
+        rules.push([ids[ida], ids[idb], g, ruleID]);
+        createRuleDiv()
+    }
+   
+   
 }
 
 function styleDiv(div, id) {
@@ -224,7 +230,7 @@ function styleRule(div, id1, id2) {
     div.addClass(id2)
     div.addClass("rule")
 
-    console.log(rules)
+
     if (!(div.class() == "undefined rule")) {
         var btn = createButton('Remove')
         btn.addClass("close-button")
@@ -232,7 +238,7 @@ function styleRule(div, id1, id2) {
         btn.mousePressed(function () {
             //remove particle
             //refreshRules(id1, id2, ruleDivs.indexOf(div))
-            console.log(ruleDivs.indexOf(div))
+        
             rules.splice([ruleDivs.indexOf(div)], 1)
             ruleDivs.splice([ruleDivs.indexOf(div)], 1)
             function removeDiv() {
@@ -270,7 +276,7 @@ function createRuleDiv() {
     }
 
 
-    var ruleDiv = createDiv(color1 + " >>> " + color2 + " " + round(g, 2) + 'g')
+    var ruleDiv = createDiv(color1 + " "  + " → "+ round(g, 2) + 'g → ' + color2 + " ")
     //rules[0] is the first rule
     //[0][0][0] is the first particle in first rule
     //[0][0][1] is the second particle in first rule
@@ -278,7 +284,7 @@ function createRuleDiv() {
 
     styleRule(ruleDiv, rules[rules.length - 1][0][0].id, rules[rules.length - 1][1][0].id)
     ruleDivs.push(ruleDiv)
-    console.log(ruleDivs)
+
 }
 
 function refreshParticles(id) {
@@ -305,7 +311,7 @@ function refreshRules() {
     const rules = document.querySelectorAll('.rule:not(.undefined)');
 
     rules.forEach(box => {
-        console.log()
+
 
         box.remove();
     });
@@ -313,7 +319,7 @@ function refreshRules() {
     const particles = document.querySelectorAll('.particle-id-div:not(.undefined)');
 
     particles.forEach(box => {
-        console.log()
+   
 
         box.remove();
     });
@@ -333,13 +339,12 @@ function refreshRules() {
 
 //various arrays that act as presets that can be pushed into particle and rule arrays
 
-function SwitchToPreset(preset) {
+function SwitchToPreset(preset, button) {
     //preset can be 0, 1, 2, 3, 4
 
     //First remove all particles, ids, and rules
     ClearArrays()
     refreshRules()
-
 
     //detect which case and assign new rules
     switch (preset) {
@@ -635,7 +640,7 @@ function SwitchToPreset(preset) {
             styleDiv(div, five[0].id)
 
     }
-    console.log(preset)
+
 }
 
 function ClearArrays() {

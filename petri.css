@@ -1,5 +1,5 @@
 #upper-text {
-    background: rgb(229, 229, 234);
+    /* background: rgb(229, 229, 234); */
     margin: 0;
     padding-top: 25px;
 }
@@ -24,7 +24,7 @@ body {
     display: flex; */
     padding: 25px;
     margin-top: 0;
-    background: rgb(229, 229, 234);
+    /* background: rgb(229, 229, 234); */
 }
 
 #canvas-container {
@@ -52,8 +52,9 @@ body {
     width: 250px;
     height: 490px;
     overflow: auto;
-    border-radius: 2px 10px 10px 0px;
+    border-radius: 10px 10px 10px 10px;
     background-color: rgb(229, 229, 234);
+    margin-left: 12px;
 }
 
 #left-column {
@@ -63,11 +64,11 @@ body {
     padding-left: 10px;
     padding-top: 10px;
     padding-right: 10px;
-    width: 250px;
+    width: 300px;
     height: 490px;
-
+    margin-right: 12px;
     overflow: auto;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 10px 10px 10px 10px;
     background-color: rgb(229, 229, 234);
 }
 
@@ -149,7 +150,7 @@ a {
     font-weight: bold;
 }
 
-.selected-button,#add-rule.game-button.selected-button {
+.selected-button {
     color: white;
     background-color: rgb(0, 122, 255);
 
@@ -167,10 +168,6 @@ a {
 
 }
 
-#add-rule.game-button {
-    background-color: rgba(0, 123, 255, 0.782);
-    color: white;
-}
 
 
 
@@ -190,8 +187,8 @@ a {
     margin-top: 12px;
     display: flex;
     justify-content: center;
-
-
+    background-color: rgba(0, 123, 255, 0.101);
+    padding: 20px;
 }
 
 
@@ -234,13 +231,19 @@ input.game-button.inputFormElement:hover {
 output {
     display: block;
     margin-top: 6px;
-    width: 50px;
+    width: 30px;
+    font-size: 16;
+    color: #3D3D3D;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+
+
 }
 
 #info {
     margin: auto;
-    margin-top: 24px;
-    width: 500px;
+
+    /* width: 500px; */
     border: 3px solid #3D3D3D;;
     padding: 10px;
     border-radius: 12px;
@@ -262,6 +265,6 @@ output {
     background: rgb(229, 229, 234);
    }
   #canvas-text-container {
-    /* position: absolute; */
+    display: flex;
    }
   }
