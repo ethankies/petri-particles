@@ -38,7 +38,6 @@ rule = (particleA, particleB, gravity) => {
                 fx += (F * dx)
                 fy += (F * dy)
             }
-
         }
         //increment velocity by applied force
         a.vx = (a.vx + fx) * 0.5
@@ -51,8 +50,6 @@ rule = (particleA, particleB, gravity) => {
         if (a.x <= 0 || a.x >= 500) { a.vx *= -1 }
         if (a.y <= 0 || a.y >= 500) { a.vy *= -1 }
     }
-
-
 
 }
 
@@ -67,8 +64,8 @@ function setup() {
     //spawn can only take a hex or a string
     cnv.parent("canvas-container");
 
-    pone = spawn(200, '#' + Math.floor(Math.random() * 16777215).toString(16), 0)
-    ptwo = spawn(200, '#' + Math.floor(Math.random() * 16777215).toString(16), 1)
+    pone = spawn(100, '#' + Math.floor(Math.random() * 16777215).toString(16), 0)
+    ptwo = spawn(100, '#' + Math.floor(Math.random() * 16777215).toString(16), 1)
     ids[0] = pone;
     ids[1] = ptwo;
 
@@ -91,7 +88,10 @@ function setup() {
     ruleDiv.style("font-weight", 'bold')
 
     //Add starting rule
-    rules.push([pone, pone, 0.01]);
+    rules.push([pone, pone, 0.1]);
+    createRuleDiv()
+
+    rules.push([ptwo, pone,-0.1]);
     createRuleDiv()
 
 }
@@ -110,6 +110,8 @@ function draw() {
         circle(element.x, element.y, 5)
 
     })
+    fill('white');
+    text("FPS " + round(frameRate()), 240, 490)
 
 }
 
@@ -157,7 +159,6 @@ function getNewParticle() {
 
 }
 
-
 function removeParticle() {
     var particleID;// = document.getElementById("color-picker").value;
     //ids.splice(particleID);
@@ -167,23 +168,23 @@ addRuleButton.onclick = function () {
     getNewRule()
 }
 function getNewRule() {
-    
+
     var ruleID = rules.length;
     var ida = document.getElementById("ida").value;
     var idb = document.getElementById("idb").value;;
     var g = document.getElementById("slider").value;
 
     var numParticles = ids.length - 1
-    if(ida > numParticles || idb > numParticles || ida < 0 || idb < 0){
-       console.log ("no" + ids.length)
-       alert("Enter a valid particle ID")
+    if (ida > numParticles || idb > numParticles || ida < 0 || idb < 0) {
+        console.log("no" + ids.length)
+        alert("Enter a valid particle ID")
     } else {
         console.log("idc")
         rules.push([ids[ida], ids[idb], g, ruleID]);
         createRuleDiv()
     }
-   
-   
+
+
 }
 
 function styleDiv(div, id) {
@@ -193,8 +194,6 @@ function styleDiv(div, id) {
     div.addClass("particle-id-div")
 
     div.parent('particle-holder')
-
-
 
 
     if (!(div.html() == "Particle ID")) {
@@ -238,7 +237,7 @@ function styleRule(div, id1, id2) {
         btn.mousePressed(function () {
             //remove particle
             //refreshRules(id1, id2, ruleDivs.indexOf(div))
-        
+
             rules.splice([ruleDivs.indexOf(div)], 1)
             ruleDivs.splice([ruleDivs.indexOf(div)], 1)
             function removeDiv() {
@@ -276,7 +275,7 @@ function createRuleDiv() {
     }
 
 
-    var ruleDiv = createDiv(color1 + " "  + " → "+ round(g, 2) + 'g → ' + color2 + " ")
+    var ruleDiv = createDiv(color1 + " " + " → " + round(g, 2) + 'g → ' + color2 + " ")
     //rules[0] is the first rule
     //[0][0][0] is the first particle in first rule
     //[0][0][1] is the second particle in first rule
@@ -311,16 +310,12 @@ function refreshRules() {
     const rules = document.querySelectorAll('.rule:not(.undefined)');
 
     rules.forEach(box => {
-
-
-        box.remove();
+      box.remove();
     });
 
     const particles = document.querySelectorAll('.particle-id-div:not(.undefined)');
 
     particles.forEach(box => {
-   
-
         box.remove();
     });
 
@@ -423,9 +418,9 @@ function SwitchToPreset(preset, button) {
 
         case 2:
             // new creation hehe
-            one = spawn(200, '#f4c92f' , 0)
-            two = spawn(100, '#82da1c'  , 1)
-            three = spawn(200, '#17ba6e' , 2)
+            one = spawn(200, '#f4c92f', 0)
+            two = spawn(100, '#82da1c', 1)
+            three = spawn(200, '#17ba6e', 2)
             four = spawn(100, '#8499eb', 3)
 
             ids[0] = one;
@@ -439,8 +434,8 @@ function SwitchToPreset(preset, button) {
             createRuleDiv()
             rules.push([three, four, 0.05]);
             createRuleDiv()
-             rules.push([four, one, 0.05]);
-             createRuleDiv()
+            rules.push([four, one, 0.05]);
+            createRuleDiv()
             // rules.push([four, four, 0.04]);
             // createRuleDiv()
             // rules.push([three, three, 0.15]);
@@ -474,9 +469,9 @@ function SwitchToPreset(preset, button) {
             break;
         case 3:
             // new creation hehe
-            one = spawn(200, '#f4c92f' , 0)
-            two = spawn(100, '#82da1c'  , 1)
-            three = spawn(200, '#17ba6e' , 2)
+            one = spawn(200, '#f4c92f', 0)
+            two = spawn(100, '#82da1c', 1)
+            three = spawn(200, '#17ba6e', 2)
             four = spawn(100, '#8499eb', 3)
 
             ids[0] = one;
@@ -490,8 +485,8 @@ function SwitchToPreset(preset, button) {
             createRuleDiv()
             rules.push([three, four, 0.05]);
             createRuleDiv()
-             rules.push([four, one, 0.05]);
-             createRuleDiv()
+            rules.push([four, one, 0.05]);
+            createRuleDiv()
             // rules.push([four, four, 0.04]);
             // createRuleDiv()
             // rules.push([three, three, 0.15]);
@@ -528,9 +523,9 @@ function SwitchToPreset(preset, button) {
             break;
         case 5:
             // new creation hehe
-            one = spawn(200, '#f4c92f' , 0)
-            two = spawn(100, '#82da1c'  , 1)
-            three = spawn(200, '#17ba6e' , 2)
+            one = spawn(200, '#f4c92f', 0)
+            two = spawn(100, '#82da1c', 1)
+            three = spawn(200, '#17ba6e', 2)
             four = spawn(100, '#8499eb', 3)
 
             ids[0] = one;
@@ -544,14 +539,14 @@ function SwitchToPreset(preset, button) {
             createRuleDiv()
             rules.push([three, three, -0.05]);
             createRuleDiv()
-             rules.push([four, four, -0.05]);
-             createRuleDiv()
-             rules.push([two, three, 0.1]);
-             createRuleDiv()
-             rules.push([three, three, 0.05]);
-             createRuleDiv()
-             rules.push([one, four, -0.1]);
-             createRuleDiv()
+            rules.push([four, four, -0.05]);
+            createRuleDiv()
+            rules.push([two, three, 0.1]);
+            createRuleDiv()
+            rules.push([three, three, 0.05]);
+            createRuleDiv()
+            rules.push([one, four, -0.1]);
+            createRuleDiv()
 
             var match = ntc.name(ids[1][0].color);
             color = match[1];
@@ -579,65 +574,32 @@ function SwitchToPreset(preset, button) {
             break;
         case 6:
             /*Random*/
-            one = spawn(random(2, 200), '#' + Math.floor(Math.random() * 16777215).toString(16), 0)
-            two = spawn(random(2, 200), '#' + Math.floor(Math.random() * 16777215).toString(16), 1)
-            three = spawn(random(2, 200), '#' + Math.floor(Math.random() * 16777215).toString(16), 2)
-            four = spawn(random(50, 400), '#' + Math.floor(Math.random() * 16777215).toString(16), 3)
-            five = spawn(random(50, 400), '#' + Math.floor(Math.random() * 16777215).toString(16), 4)
-            ids[0] = one;
-            ids[1] = two;
-            ids[2] = three;
-            ids[3] = four;
-            ids[4] = five;
+            //random num of particles to spawn
+            var randomNum = random(2, 10)
+            for (var i = 0; i < randomNum; i++) {
+                ids[i] = spawn(random(2, 200), '#' + Math.floor(Math.random() * 16777215).toString(16), i)
+            }
 
-            rules.push([random(ids), random(ids), random(-1, 1)]);
-            createRuleDiv()
-            rules.push([random(ids), random(ids), random(-1, 1)]);
-            createRuleDiv()
-            rules.push([random(ids), random(ids), random(-1, 1)]);
-            createRuleDiv()
-            rules.push([random(ids), random(ids), random(-1, 1)]);
-            createRuleDiv()
-            rules.push([random(ids), random(ids), random(-1, 1)]);
-            createRuleDiv()
-            rules.push([random(ids), random(ids), random(-1, 1)]);
-            createRuleDiv()
-            rules.push([random(ids), random(ids), random(-1, 1)]);
-            createRuleDiv()
-            rules.push([random(ids), random(ids), random(-1, 1)]);
-            createRuleDiv()
-            rules.push([random(ids), random(ids), random(-1, 1)]);
-            createRuleDiv()
+            //create random rules
+            for (var i = 0; i < random(1, 5); i++) {
+                ids.forEach(part => {
+                    rules.push([part, random(ids), random(-1.82, 1.82)]);
+                    createRuleDiv()
 
-            var match = ntc.name(ids[1][0].color);
-            color = match[1];
 
-            var div = createDiv("Particle #" + one[0].id + " (" + color + ")");
-            styleDiv(div, ptwo[0].id)
+                })
 
-            var match = ntc.name(ids[0][0].color);
-            color = match[1];
+            }
 
-            var div = createDiv("Particle #" + two[0].id + " (" + color + ")");
-            styleDiv(div, two[0].id)
+            //make div for each particle id
+            ids.forEach(part => {
+                var match = ntc.name(part[0].color);
+                color = match[1];
+                var div = createDiv("Particle #" + part[0].id + " (" + color + ")");
+                styleDiv(div, part[0].id)
+            }
 
-            var match = ntc.name(ids[1][0].color);
-            color = match[1];
-
-            var div = createDiv("Particle #" + three[0].id + " (" + color + ")");
-            styleDiv(div, three[0].id)
-
-            var match = ntc.name(ids[2][0].color);
-            color = match[1];
-
-            var div = createDiv("Particle #" + four[0].id + " (" + color + ")");
-            styleDiv(div, four[0].id)
-
-            var match = ntc.name(ids[2][0].color);
-            color = match[1];
-
-            var div = createDiv("Particle #" + five[0].id + " (" + color + ")");
-            styleDiv(div, five[0].id)
+            )
 
     }
 
